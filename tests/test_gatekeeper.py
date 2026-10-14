@@ -62,6 +62,22 @@ def test_stubs_except_exception_pass():
     assert any("Silent exception" in f for f in res["flaws"])
 
 
+def test_stubs_ts_empty_method():
+    code1 = "class Service {\n    foo(): void {}\n}"
+    res1 = scan_code(code1)
+    assert res1["status"] == "REJECTED"
+    assert any("Empty TypeScript/JavaScript method" in f for f in res1["flaws"])
+
+    code2 = "public async calculate(x: number): Promise<void> { }"
+    res2 = scan_code(code2)
+    assert res2["status"] == "REJECTED"
+    assert any("Empty TypeScript/JavaScript method" in f for f in res2["flaws"])
+
+    code3 = "class Service {\n    foo(): void { return; }\n}"
+    res3 = scan_code(code3)
+    assert res3["status"] == "CERTIFIED"
+
+
 # --- TASK 2: Dangerous Execution ---
 
 def test_dangerous_eval():

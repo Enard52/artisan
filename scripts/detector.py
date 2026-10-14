@@ -51,6 +51,13 @@ RULES = [
         "Silent exception suppression (except: pass or except Exception: pass). Log or handle errors.",
         25
     ),
+    (
+        "STUB_TS_EMPTY_METHOD",
+        "STUB",
+        r"\b(?:(?:public|private|protected|async|static|override|readonly|function)\s+)*(?!if|while|for|switch|catch)\b[a-zA-Z_$][a-zA-Z0-9_$]*\s*\([^)]*\)\s*(?::\s*[^{]+)?\s*\{\s*\}",
+        "Empty TypeScript/JavaScript method stub detected. Implement complete functionality.",
+        20
+    ),
 
     # 2. Dangerous Dynamic Execution & Injections (artisan-ignore)
     (
